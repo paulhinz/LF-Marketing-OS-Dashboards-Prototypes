@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Impact — Clickable Prototype</title>
+<style>
+  :root{
+    --blue:#146ef5; --blue-dark:#0d5bd6; --blue-bg:#eaf2fe;
+    --ink:#0f172a; --ink-2:#475569; --ink-3:#94a3b8;
+    --bg:#f6f8fa; --card:#ffffff; --line:#e5e9f0;
+    --red:#e5484d; --red-bg:#fdecec; --amber:#d97706; --amber-bg:#fef3e2;
+    --green:#189d5d; --green-bg:#e7f6ee; --gray-bg:#f1f5f9;
+    --radius:10px; --shadow:0 1px 2px rgba(16,24,40,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
+  a{color:var(--blue);text-decoration:none;cursor:pointer}
+  .app{display:flex;min-height:100vh}
+  .rail{width:52px;background:#0b1220;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:18px;flex-shrink:0}
+  .rail .dot{width:24px;height:24px;border-radius:6px;background:#1d2a44}
+  .rail .dot.active{background:var(--blue)}
+  .side{width:212px;background:#fff;border-right:1px solid var(--line);padding:14px 10px;flex-shrink:0}
+  .proj{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:8px;margin-bottom:14px}
+  .proj .logo{width:28px;height:28px;border-radius:6px;background:var(--blue-bg);color:var(--blue);font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center}
+  .proj b{font-size:12.5px;display:block;line-height:1.2}
+  .proj span{font-size:11px;color:var(--ink-3)}
+  .navlab{font-size:10px;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase;margin:14px 8px 4px}
+  .navitem{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:7px;color:var(--ink-2);font-size:13px;cursor:pointer}
+  .navitem:hover{background:var(--gray-bg)}
+  .navitem.active{background:var(--blue-bg);color:var(--blue);font-weight:600}
+  .navitem svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+  .main{flex:1;padding:22px 28px;max-width:1180px}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+  h1{font-size:19px;font-weight:700}
+  .sub{color:var(--ink-2);font-size:12.5px;margin-top:2px}
+  .sub2{color:var(--ink-3);font-size:11.5px;margin-top:2px}
+  .controls{display:flex;gap:10px;align-items:center}
+  .select{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;font-size:12.5px;color:var(--ink-2);box-shadow:var(--shadow)}
+  .persona{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+  .persona button{border:0;background:transparent;padding:7px 14px;font-size:12.5px;font-family:inherit;color:var(--ink-2);cursor:pointer;display:flex;gap:6px;align-items:center}
+  .persona button.active{background:var(--blue);color:#fff;font-weight:600}
+  .persona .av{width:16px;height:16px;border-radius:50%;background:var(--blue-bg);color:var(--blue);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .persona button.active .av{background:rgba(255,255,255,.25);color:#fff}
+  .sampletag{position:fixed;bottom:14px;right:16px;background:#0b1220;color:#fff;font-size:11px;padding:6px 12px;border-radius:20px;opacity:.85;z-index:50}
+  .crumbs{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-3);margin:10px 0 14px}
+  .crumbs a{color:var(--blue)}
+  .crumbs .sep{color:var(--ink-3)}
+  .focusrow{display:flex;gap:8px;align-items:center;margin:12px 0 4px;font-size:11px}
+  .focusrow .lab{color:var(--ink-3);letter-spacing:.06em;font-weight:600}
+  .pill{border:1px solid var(--line);background:#fff;border-radius:16px;padding:5px 13px;font-size:12px;color:var(--ink-2);cursor:pointer}
+  .pill.active{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+  .tabs{display:flex;gap:20px;border-bottom:1px solid var(--line);margin:10px 0 18px}
+  .tab{padding:8px 2px;font-size:13px;color:var(--ink-2);cursor:pointer;border-bottom:2px solid transparent}
+  .tab.active{color:var(--blue);border-color:var(--blue);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
+  .card h2{font-size:14.5px;font-weight:700}
+  .card .q{font-size:12px;color:var(--ink-3);margin-top:1px}
+  .cardhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .outcome{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;cursor:pointer;transition:border-color .12s, box-shadow .12s;position:relative}
+  .outcome:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(20,110,245,.12)}
+  .outcome .ocat{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+  .outcome .oname{font-size:13.5px;font-weight:700;margin:3px 0 10px}
+  .outcome .big{font-size:24px;font-weight:700;letter-spacing:-.01em}
+  .outcome .big small{font-size:13px;color:var(--ink-3);font-weight:500}
+  .outcome .goal{font-size:11.5px;color:var(--ink-2);margin-top:2px}
+  .outcome .drill{position:absolute;top:14px;right:14px;font-size:11px;color:var(--blue);opacity:0;transition:opacity .12s}
+  .outcome:hover .drill{opacity:1}
+  .status{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;padding:3px 8px;border-radius:5px;margin-top:10px}
+  .st-ontrack{background:var(--green-bg);color:var(--green)}
+  .st-behind{background:var(--amber-bg);color:var(--amber)}
+  .st-risk{background:var(--red-bg);color:var(--red)}
+  .delta{font-size:11.5px;font-weight:600;margin-left:6px}
+  .up{color:var(--green)} .down{color:var(--red)}
+  .bar{height:6px;border-radius:4px;background:var(--gray-bg);overflow:hidden;margin-top:10px}
+  .bar i{display:block;height:100%;border-radius:4px}
+  .b-green{background:var(--green)} .b-amber{background:#f59e0b} .b-red{background:var(--red)} .b-blue{background:var(--blue)}
+  .mtag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
+  .t-dec{background:#0b1220;color:#fff}
+  .t-sig{background:var(--amber-bg);color:var(--amber)}
+  .t-wat{background:var(--gray-bg);color:var(--ink-3)}
+  .alert{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:12px 14px;margin-bottom:10px;background:#fff}
+  .alert.amber{border-left-color:#f59e0b}
+  .alert .abadge{font-size:9.5px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--red);padding:2px 7px;border-radius:4px}
+  .alert.amber .abadge{background:#f59e0b}
+  .alert b{font-size:13px;display:block;margin:4px 0 2px}
+  .alert p{font-size:12px;color:var(--ink-2)}
+  .btn{background:var(--blue);color:#fff;border:0;font-family:inherit;font-size:12px;font-weight:600;padding:7px 14px;border-radius:7px;cursor:pointer;white-space:nowrap}
+  .btn:hover{background:var(--blue-dark)}
+  .btn.ghost{background:#fff;color:var(--blue);border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:10px;border-bottom:1px solid #f1f4f8;vertical-align:middle}
+  tr.rowlink{cursor:pointer}
+  tr.rowlink:hover td{background:#f8fafc}
+  td .tbar{width:110px;height:5px;background:var(--gray-bg);border-radius:3px;display:inline-block;margin-right:8px;vertical-align:middle}
+  td .tbar i{display:block;height:100%;border-radius:3px}
+  .num{font-variant-numeric:tabular-nums}
+  .kpirow{display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+  .kpirow>div{padding:6px 14px;border-right:1px solid #f1f4f8}
+  .kpirow>div:last-child{border-right:0}
+  .kpirow .kl{font-size:11px;color:var(--ink-2);display:flex;gap:5px;align-items:center}
+  .kpirow .kv{font-size:20px;font-weight:700;margin-top:4px;letter-spacing:-.01em}
+  .kpirow .kd{font-size:11px;margin-top:2px;font-weight:600}
+  .funnel{display:flex;gap:8px;align-items:flex-end;margin-top:6px}
+  .fstage{flex:1;text-align:center}
+  .fstage .fbar{background:var(--blue-bg);border-radius:6px 6px 0 0;margin:0 auto;display:flex;align-items:flex-end;justify-content:center;color:var(--blue);font-weight:700;font-size:12px;padding-bottom:6px}
+  .fstage.hotf .fbar{background:#fde8e8;color:var(--red)}
+  .fstage .fl{font-size:11px;color:var(--ink-2);margin-top:6px}
+  .fstage .fp{font-size:10px;color:var(--ink-3)}
+  .spark{display:flex;gap:3px;align-items:flex-end;height:36px;margin-top:8px}
+  .spark i{flex:1;background:var(--blue-bg);border-radius:2px 2px 0 0}
+  .spark i.hi{background:var(--blue)}
+  .split{display:flex;gap:14px}
+  .split>.card{flex:1}
+  .mini{font-size:12px;color:var(--ink-2);line-height:1.5}
+  .legend{display:flex;gap:14px;font-size:11px;color:var(--ink-2);margin-top:8px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:baseline}
+  .stack{height:14px;border-radius:7px;overflow:hidden;display:flex;margin-top:10px}
+  .stack i{height:100%}
+  .footnote{font-size:11px;color:var(--ink-3);margin-top:10px}
+  .view{display:none}
+  .view.on{display:block}
+  .backlink{font-size:12.5px;margin-bottom:10px;display:inline-block}
+  .section-note{background:var(--blue-bg);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--blue-dark);margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="sampletag">PROTOTYPE · sample data only</div>
+<div class="app">
+  <div class="rail">
+    <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <div class="side">
+    <div class="proj">
+      <div class="logo">CN</div>
+      <div><b>Cloud Native Computing F…</b><span>Foundation</span></div>
+    </div>
+    <div class="navitem"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+    <div class="navitem"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Projects</div>
+    <div class="navitem"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Events</div>
+    <div class="navlab">Metrics</div>
+    <div class="navitem"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Health Metrics</div>
+    <div class="navitem"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Social Listening</div>
+    <div class="navlab">Marketing</div>
+    <div class="navitem active"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>Marketing Impact</div>
+    <div class="navitem"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.2L4 17.2V4z"/></svg>Campaigns</div>
+  </div>
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <h1>Marketing Impact</h1>
+        <div class="sub" id="subtitle">Is marketing moving the needle on business outcomes?</div>
+        <div class="sub2" id="subtitle2">Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026</div>
+      </div>
+      <div class="controls">
+        <div class="persona">
+          <button id="p-exec" class="active" onclick="setPersona('exec')"><span class="av">RD</span>Executive Director</button>
+          <button id="p-lead" onclick="setPersona('lead')"><span class="av">MB</span>Marketing Lead</button>
+        </div>
+        <div class="select" id="periodsel">July 2026 ▾</div>
+      </div>
+    </div>
+    <div class="crumbs" id="crumbs"></div>
+    <div class="view on" id="view-exec">
+      <div class="focusrow">
+        <span class="lab">FOCUS</span>
+        <span class="pill active">All outcomes</span>
+        <span class="pill">Membership</span>
+        <span class="pill">Events</span>
+        <span class="pill">Audience</span>
+        <span class="pill">Adoption</span>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Outcomes</div>
+        <div class="tab" onclick="alert('Prototype: Attribution view not built yet')">Attribution</div>
+        <div class="tab" onclick="alert('Prototype: Budget view not built yet')">Budget</div>
+      </div>
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="outcome" onclick="go('membership')">
+          <div class="drill">Open →</div>
+          <div class="ocat">Secure Commitment</div>
+          <div class="oname">Membership Growth</div>
+          <div class="big">$2.4M <small>/ $3.0M pipeline</small></div>
+          <div class="goal">12 new members closed YTD · goal 20</div>
+          <div class="bar"><i class="b-amber" style="width:80%"></i></div>
+          <span class="status st-behind">BEHIND · 80% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('events')">
+          <div class="drill">Open →</div>
+          <div class="ocat">Fill the Seats</div>
+          <div class="oname">Event Success</div>
+          <div class="big">14.2K <small>/ 24K regs YTD</small></div>
+          <div class="goal">Sponsorship $9.8M / $11M · flagship at risk</div>
+          <div class="bar"><i class="b-red" style="width:59%"></i></div>
+          <span class="status st-risk">AT RISK · FLAGSHIP 22%</span>
+        </div>
+        <div class="outcome" onclick="go('audience')">
+          <div class="drill">Open →</div>
+          <div class="ocat">Grow the Audience</div>
+          <div class="oname">Audience Growth</div>
+          <div class="big">41K <small>/ 50K engaged</small></div>
+          <div class="goal">Total reach 486K <span class="delta up">▲ 3.1% MoM</span></div>
+          <div class="bar"><i class="b-green" style="width:82%"></i></div>
+          <span class="status st-ontrack">ON TRACK · 82% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('adoption')">
+          <div class="drill">Open →</div>
+          <div class="ocat">Adoption</div>
+          <div class="oname">Community &amp; Adoption</div>
+          <div class="big">128 <small>/ 140 active groups</small></div>
+          <div class="goal">9.4K contributors <span class="delta up">▲ 6% QoQ</span></div>
+          <div class="bar"><i class="b-green" style="width:91%"></i></div>
+          <span class="status st-ontrack">ON TRACK · 91% TO GOAL</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Needs attention</h2><div class="q">Decisions where marketing can move the needle this month</div></div>
+        </div>
+        <div class="alert">
+          <div>
+            <span class="abadge">CRITICALLY BEHIND GOAL</span>
+            <b>NavCon North America 2026 is 22% to its registration goal</b>
+            <p>2.2K / 10K registrations · pacing −25% vs last year · email and paid are the fastest levers</p>
+          </div>
+          <button class="btn" onclick="go('events')">Review event</button>
+        </div>
+        <div class="alert amber">
+          <div>
+            <span class="abadge">RENEWAL RISK</span>
+            <b>3 Platinum members have zero marketing touchpoints in 90 days</b>
+            <p>Combined renewal value $360K · recommended: targeted member-engagement campaign</p>
+          </div>
+          <button class="btn" onclick="go('membership')">Review members</button>
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead">
+            <div><h2>Marketing contribution to pipeline <span class="mtag t-dec">DECISION</span></h2><div class="q">Linear attribution · July 2026</div></div>
+            <a onclick="go('membership')">Detail →</a>
+          </div>
+          <div class="stack">
+            <i style="width:38%;background:var(--blue)"></i>
+            <i style="width:36%;background:#8ab7f8"></i>
+            <i style="width:26%;background:#dbe7f9"></i>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--blue)"></i>Marketing-sourced · $920K (38%)</span>
+            <span><i style="background:#8ab7f8"></i>Marketing-influenced · $870K (36%)</span>
+            <span><i style="background:#dbe7f9"></i>Sales-only · $610K (26%)</span>
+          </div>
+          <div class="footnote">Marketing touched 74% of open pipeline · avg 5.8 months first-touch → close (H2 activity seeds 2027)</div>
+        </div>
+        <div class="card">
+          <div class="cardhead">
+            <div><h2>Outcome trend</h2><div class="q">Engaged audience · trailing 8 months</div></div>
+          </div>
+          <div class="spark">
+            <i style="height:38%"></i><i style="height:44%"></i><i style="height:41%"></i><i style="height:52%"></i>
+            <i style="height:58%"></i><i style="height:63%"></i><i style="height:71%"></i><i class="hi" style="height:82%"></i>
+          </div>
+          <div class="legend"><span>Dec ’25 → Jul ’26 · engaged contacts 24K → 41K</span></div>
+          <div class="footnote">Growth accelerated after Q2 narrative launch · newsletter + events are top drivers</div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-membership">
+      <a class="backlink" onclick="go('exec')">← Back to outcomes</a>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Membership Growth — Secure Commitment</h2><div class="q">Is marketing generating and accelerating member pipeline?</div></div>
+          <span class="status st-behind" style="margin:0">BEHIND · 80% TO GOAL</span>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Pipeline vs goal <span class="mtag t-dec">DECISION</span></div><div class="kv num">$2.4M</div><div class="kd">80% of $3.0M</div></div>
+          <div><div class="kl">New members YTD <span class="mtag t-dec">DECISION</span></div><div class="kv num">12 / 20</div><div class="kd down">▼ 2 vs plan</div></div>
+          <div><div class="kl">Mktg-sourced <span class="mtag t-dec">DECISION</span></div><div class="kv num">38%</div><div class="kd up">▲ 5pt MoM</div></div>
+          <div><div class="kl">Mktg-influenced <span class="mtag t-dec">DECISION</span></div><div class="kv num">74%</div><div class="kd up">▲ 3pt MoM</div></div>
+          <div><div class="kl">Pipeline velocity <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">5.8 mo</div><div class="kd">first touch → close</div></div>
+          <div><div class="kl">At-risk members <span class="mtag t-dec">DECISION</span></div><div class="kv num">25</div><div class="kd down">3 Platinum</div></div>
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Member journey funnel</h2><div class="q">Contacts by stage · Fit × Warmth scoring</div></div></div>
+          <div class="funnel">
+            <div class="fstage"><div class="fbar" style="height:110px;width:86%">120K</div><div class="fl">Aware</div><div class="fp">—</div></div>
+            <div class="fstage"><div class="fbar" style="height:84px;width:86%">18.4K</div><div class="fl">Engaged</div><div class="fp">15%</div></div>
+            <div class="fstage"><div class="fbar" style="height:58px;width:86%">2,150</div><div class="fl">Viable</div><div class="fp">12%</div></div>
+            <div class="fstage"><div class="fbar" style="height:42px;width:86%">640</div><div class="fl">Warm</div><div class="fp">30%</div></div>
+            <div class="fstage hotf"><div class="fbar" style="height:30px;width:86%">210</div><div class="fl">Hot</div><div class="fp">33%</div></div>
+            <div class="fstage"><div class="fbar" style="height:20px;width:86%">12</div><div class="fl">Closed</div><div class="fp">6%</div></div>
+          </div>
+          <div class="footnote">18 hand-raisers this month (membership application, "talk to sales", prospectus download) — auto-promoted to Hot</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Members by tier <span class="mtag t-dec">DECISION</span></h2><div class="q">New · renewing · at-risk</div></div></div>
+          <table>
+            <tr><th>Tier</th><th>Total</th><th>New YTD</th><th>At risk</th><th>Benefit utilization</th></tr>
+            <tr><td><b>Platinum</b></td><td class="num">28</td><td class="num">2</td><td class="num" style="color:var(--red);font-weight:700">3</td><td><span class="tbar"><i class="b-green" style="width:72%"></i></span>72%</td></tr>
+            <tr><td><b>Gold</b></td><td class="num">64</td><td class="num">4</td><td class="num" style="color:var(--amber);font-weight:700">5</td><td><span class="tbar"><i class="b-amber" style="width:54%"></i></span>54%</td></tr>
+            <tr><td><b>Silver</b></td><td class="num">310</td><td class="num">6</td><td class="num">17</td><td><span class="tbar"><i class="b-amber" style="width:41%"></i></span>41%</td></tr>
+          </table>
+          <div class="footnote">Zero-touchpoint members in last 90 days: 25 · amplification-kit uptake: 38 members drove 12.4K UTM-tracked visits</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Pipeline by channel</h2><div class="q">Which activities source and influence pipeline · click a campaign for detail</div></div>
+        </div>
+        <table>
+          <tr><th>Channel</th><th>Sourced pipeline</th><th></th><th>Top campaign</th><th>Primary KPI</th><th>Status</th></tr>
+          <tr class="rowlink" onclick="go('campaign')"><td><b>Events</b></td><td class="num">$410K</td><td><span class="tbar"><i class="b-blue" style="width:100%"></i></span></td><td>Membership Drive Q3 — Enterprise AI</td><td>Pipeline influence</td><td><span class="status st-ontrack" style="margin:0">ON TRACK</span></td></tr>
+          <tr class="rowlink" onclick="go('campaign')"><td><b>Paid media</b></td><td class="num">$180K</td><td><span class="tbar"><i class="b-blue" style="width:44%"></i></span></td><td>Membership Drive Q3 — Enterprise AI</td><td>Pipeline influence</td><td><span class="status st-ontrack" style="margin:0">ON TRACK</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>Email nurture</b></td><td class="num">$140K</td><td><span class="tbar"><i class="b-blue" style="width:34%"></i></span></td><td>Member Benefits Nurture</td><td>Conversion rate</td><td><span class="status st-behind" style="margin:0">BEHIND</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>Content / organic</b></td><td class="num">$120K</td><td><span class="tbar"><i class="b-blue" style="width:29%"></i></span></td><td>Narrative Hub — “Where AI runs”</td><td>Share of voice</td><td><span class="status st-ontrack" style="margin:0">ON TRACK</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>Social</b></td><td class="num">$70K</td><td><span class="tbar"><i class="b-blue" style="width:17%"></i></span></td><td>Maintainer Voices series</td><td>Engagement</td><td><span class="status st-behind" style="margin:0">BEHIND</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="view" id="view-events">
+      <a class="backlink" onclick="go('exec')">← Back to outcomes</a>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Event Success — Fill the Seats</h2><div class="q">Are events filling and paying back?</div></div>
+          <span class="status st-risk" style="margin:0">AT RISK</span>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Registrations YTD</div><div class="kv num">14.2K</div><div class="kd">59% of 24K goal</div></div>
+          <div><div class="kl">Sponsorship rev.</div><div class="kv num">$9.8M</div><div class="kd">89% of $11M</div></div>
+          <div><div class="kl">Cost / registration <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">$31</div><div class="kd up">▼ $4 MoM</div></div>
+          <div><div class="kl">Post-event pipeline <span class="mtag t-dec">DECISION</span></div><div class="kv num">$310K</div><div class="kd">90-day window</div></div>
+          <div><div class="kl">Net-new contacts <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">3.1K</div><div class="kd">3rd-party events</div></div>
+          <div><div class="kl">Owned-channel tickets</div><div class="kv num">34%</div><div class="kd up">▲ target 50%</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Upcoming events</h2><div class="q">Registrations and sponsorship vs goal · click an event</div></div>
+          <div><span class="pill active">Upcoming</span> <span class="pill">All events</span></div>
+        </div>
+        <table>
+          <tr><th>Date</th><th>Name</th><th>Registrations</th><th></th><th>Sponsorship</th><th>Reg. by channel</th></tr>
+          <tr class="rowlink" onclick="go('campaign')">
+            <td class="num">Nov 9</td><td><b>NavCon North America 2026</b> <span class="status st-risk" style="margin:0 0 0 6px">22%</span></td>
+            <td class="num">2.2K / 10K</td><td><span class="tbar"><i class="b-red" style="width:22%"></i></span></td>
+            <td class="num">$11.9M / $12.5M</td><td class="mini">Email 31% · Paid 27% · Organic 42%</td>
+          </tr>
+          <tr class="rowlink" onclick="alert('Prototype: event drill shown for NavCon only')">
+            <td class="num">Sep 14</td><td><b>ServiceMeshCon EU 2026</b></td>
+            <td class="num">190 / 300</td><td><span class="tbar"><i class="b-amber" style="width:63%"></i></span></td>
+            <td class="num">$92K / $120K</td><td class="mini">Email 44% · Paid 18% · Organic 38%</td>
+          </tr>
+          <tr class="rowlink" onclick="alert('Prototype: event drill shown for NavCon only')">
+            <td class="num">Oct 6</td><td><b>Observability Summit 2026</b></td>
+            <td class="num">210 / 250</td><td><span class="tbar"><i class="b-green" style="width:84%"></i></span></td>
+            <td class="num">$118K / $130K</td><td class="mini">Email 39% · Paid 22% · Organic 39%</td>
+          </tr>
+          <tr class="rowlink" onclick="alert('Prototype: event drill shown for NavCon only')">
+            <td class="num">Nov 20</td><td><b>DevMeet India 2026</b></td>
+            <td class="num">85 / 200</td><td><span class="tbar"><i class="b-amber" style="width:43%"></i></span></td>
+            <td class="num">$8K / $25K</td><td class="mini">Email 21% · Paid 12% · Organic 67%</td>
+          </tr>
+        </table>
+        <div class="footnote">Community-run days YTD: 22 across 14 countries · regional registration growth is the leading indicator for flagship city selection</div>
+      </div>
+    </div>
+    <div class="view" id="view-audience">
+      <a class="backlink" onclick="go('exec')">← Back to outcomes</a>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Audience Growth — Grow the Audience</h2><div class="q">Is our reach growing among the people who matter?</div></div>
+          <span class="status st-ontrack" style="margin:0">ON TRACK</span>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Engaged contacts <span class="mtag t-dec">DECISION</span></div><div class="kv num">41K</div><div class="kd">82% of 50K goal</div></div>
+          <div><div class="kl">Total reach</div><div class="kv num">486K</div><div class="kd up">▲ 3.1% MoM</div></div>
+          <div><div class="kl">Newsletter subs</div><div class="kv num">62K</div><div class="kd up">▲ 1.8K MoM</div></div>
+          <div><div class="kl">Follower growth <span class="mtag t-wat">WATCH</span></div><div class="kv num">+0.8%/wk</div><div class="kd">net new, all platforms</div></div>
+          <div><div class="kl">Share of voice <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">27%</div><div class="kd up">▲ 4pt vs Q2</div></div>
+          <div><div class="kl">Msg pull-through <span class="mtag t-wat">WATCH</span></div><div class="kv num">61</div><div class="kd">external uses of narrative</div></div>
+        </div>
+        <div class="footnote" style="margin-top:14px">Narrative tracking: “where AI systems run” language appeared in 61 external posts/articles this month (▲ 22) — the narrative is spreading beyond owned channels.</div>
+      </div>
+      <div class="section-note">Prototype note: this level-2 view is intentionally lighter — full spec would mirror the Membership layout (trend, segment table, channel drill).</div>
+    </div>
+    <div class="view" id="view-adoption">
+      <a class="backlink" onclick="go('exec')">← Back to outcomes</a>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Community &amp; Adoption</h2><div class="q">Is the community healthy and is adoption growing?</div></div>
+          <span class="status st-ontrack" style="margin:0">ON TRACK</span>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Active groups <span class="mtag t-dec">DECISION</span></div><div class="kv num">128 / 140</div><div class="kd up">▲ 6 MoM</div></div>
+          <div><div class="kl">Stagnant groups</div><div class="kv num">31</div><div class="kd down">re-engagement needed</div></div>
+          <div><div class="kl">RSVPs (month) <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">8.9K</div><div class="kd up">▲ 12% MoM</div></div>
+          <div><div class="kl">Contributors</div><div class="kv num">9.4K</div><div class="kd up">▲ 6% QoQ</div></div>
+          <div><div class="kl">Active ambassadors <span class="mtag t-dec">DECISION</span></div><div class="kv num">176 / 304</div><div class="kd down">58% active</div></div>
+          <div><div class="kl">Campaign-tied events <span class="mtag t-dec">DECISION</span></div><div class="kv num">19</div><div class="kd">4.2K RSVPs reached</div></div>
+        </div>
+        <div class="footnote" style="margin-top:14px">Community events tied to campaigns proved community as a marketing channel: the Q3 narrative launch reached 4.2K people through 19 community group events.</div>
+      </div>
+      <div class="section-note">Prototype note: this level-2 view is intentionally lighter — full spec adds region map, group-type split, and ambassador contribution breakdown.</div>
+    </div>
+    <div class="view" id="view-campaign">
+      <a class="backlink" onclick="back()">← Back</a>
+      <div class="card">
+        <div class="cardhead">
+          <div>
+            <h2>Membership Drive Q3 — Enterprise AI</h2>
+            <div class="q">Business outcome: Secure Commitment · Owner: Demand Gen · Jul 1 – Sep 30, 2026</div>
+          </div>
+          <span class="status st-ontrack" style="margin:0">ON TRACK</span>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Primary KPI <span class="mtag t-dec">DECISION</span></div><div class="kv" style="font-size:14px;margin-top:8px">Pipeline influence</div><div class="kd num">$340K influenced</div></div>
+          <div><div class="kl">Budget</div><div class="kv num">$68K</div><div class="kd">57% of $120K spent</div></div>
+          <div><div class="kl">Sales-ready contacts</div><div class="kv num">64</div><div class="kd up">▲ 21 this month</div></div>
+          <div><div class="kl">Cost / SRC</div><div class="kv num">$1,062</div><div class="kd up">▼ 18% vs benchmark</div></div>
+          <div><div class="kl">ROAS <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">4.9×</div><div class="kd up">floor 2.0× · healthy</div></div>
+          <div><div class="kl">Days remaining</div><div class="kv num">49</div><div class="kd">ends Sep 30</div></div>
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Campaign funnel</h2><div class="q">Segment progression since launch</div></div></div>
+          <div class="funnel">
+            <div class="fstage"><div class="fbar" style="height:96px;width:86%">1,240</div><div class="fl">Viable</div><div class="fp">—</div></div>
+            <div class="fstage"><div class="fbar" style="height:62px;width:86%">380</div><div class="fl">Warm</div><div class="fp">31%</div></div>
+            <div class="fstage hotf"><div class="fbar" style="height:38px;width:86%">92</div><div class="fl">Hot</div><div class="fp">24%</div></div>
+            <div class="fstage"><div class="fbar" style="height:24px;width:86%">64</div><div class="fl">Sales-ready</div><div class="fp">70%</div></div>
+            <div class="fstage"><div class="fbar" style="height:16px;width:86%">3</div><div class="fl">Converted</div><div class="fp">5%</div></div>
+          </div>
+          <div class="footnote">7 hand-raisers bypassed scoring (benefits guide 2nd download, “talk to sales” CTA)</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Channel performance</h2><div class="q">Within this campaign</div></div></div>
+          <table>
+            <tr><th>Channel</th><th>Spend</th><th>SRCs</th><th>Cost/SRC</th></tr>
+            <tr><td>LinkedIn Ads</td><td class="num">$32K</td><td class="num">28</td><td class="num">$1,143</td></tr>
+            <tr><td>Search (SEM)</td><td class="num">$18K</td><td class="num">17</td><td class="num">$1,059</td></tr>
+            <tr><td>Email nurture</td><td class="num">$6K</td><td class="num">12</td><td class="num">$500</td></tr>
+            <tr><td>Webinar series</td><td class="num">$12K</td><td class="num">7</td><td class="num">$1,714</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h2>Agent recommendation</h2><div class="q">From Campaign Performance Agent · today 06:40</div></div></div>
+        <div class="alert amber" style="margin-bottom:0">
+          <div>
+            <span class="abadge">A/B RESULT</span>
+            <b>Ad variant B (“run AI where it runs best”) CTR is 2.1× variant A</b>
+            <p>Recommend promoting variant B to 100% of spend and adopting the phrase in campaign emails · est. +9 SRCs/month</p>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn" onclick="this.textContent='Promoted ✓';this.disabled=true;this.style.background='var(--green)'">Promote variant B</button>
+            <button class="btn ghost" onclick="alert('Prototype: dismissed')">Dismiss</button>
+          </div>
+        </div>
+        <div class="footnote">Every agent action is reversible — one-click undo for 30 days.</div>
+      </div>
+    </div>
+    <div class="view" id="view-lead">
+      <div class="focusrow">
+        <span class="lab">CHANNELS</span>
+        <span class="pill active">All</span>
+        <span class="pill">Paid</span>
+        <span class="pill">Social</span>
+        <span class="pill">Email</span>
+        <span class="pill">Content</span>
+      </div>
+      <div class="tabs">
+        <div class="tab active">This week</div>
+        <div class="tab" onclick="alert('Prototype: trends view not built yet')">Trends</div>
+        <div class="tab" onclick="go('campaign')">Campaigns</div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h2>Act on this week</h2><div class="q">Decision-tagged changes since last week</div></div></div>
+        <div class="alert">
+          <div>
+            <span class="abadge">DECISION</span>
+            <b>“Inference” ad variants out-perform “cloud-native AI” 2.1× on CTR</b>
+            <p>Consistent across LinkedIn + search for 3 weeks · update exec talking points and event copy</p>
+          </div>
+          <button class="btn" onclick="go('campaign')">Open campaign</button>
+        </div>
+        <div class="alert amber">
+          <div>
+            <span class="abadge">SIGNAL</span>
+            <b>Prospect-segment email open rate dropped to 14% (from 19%)</b>
+            <p>Started with the Aug 4 send · subject-line A/B recommended before next send</p>
+          </div>
+          <button class="btn ghost" onclick="alert('Prototype: email drill not built yet')">Review</button>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="cardhead"><div><h2>Paid advertising</h2><div class="q">Google + LinkedIn Ads · this week</div></div></div>
+          <table>
+            <tr><th>Metric</th><th>Value</th><th>Δ wk</th><th>Tag</th></tr>
+            <tr><td>CTR — variant B (“inference”)</td><td class="num">1.9%</td><td class="up num">▲ 0.3</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>CTR — variant A (“cloud-native AI”)</td><td class="num">0.9%</td><td class="num">—</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>CPC — event campaigns</td><td class="num">$3.10</td><td class="up num">▼ $0.40</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>CPC — membership campaigns</td><td class="num">$6.80</td><td class="down num">▲ $0.90</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Impressions — infra engineers</td><td class="num">210K</td><td class="up num">▲ 8%</td><td><span class="mtag t-sig" style="margin:0">SIGNAL</span></td></tr>
+            <tr><td>Cost per lead — by type</td><td class="num">$48–$310</td><td class="num">—</td><td><span class="mtag t-wat" style="margin:0">WATCH</span></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Social media</h2><div class="q">All accounts · this week</div></div></div>
+          <table>
+            <tr><th>Metric</th><th>Value</th><th>Δ wk</th><th>Tag</th></tr>
+            <tr><td>Engagement — video</td><td class="num">4.8%</td><td class="up num">▲ 0.6</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Engagement — static/text</td><td class="num">1.6%</td><td class="num">—</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Top message tag</td><td>“inference” (11 posts)</td><td class="up num">▲</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Event social lift (pre-event)</td><td class="num">+38%</td><td class="up num">▲</td><td><span class="mtag t-sig" style="margin:0">SIGNAL</span></td></tr>
+            <tr><td>Follower growth (net/wk)</td><td class="num">+0.8%</td><td class="num">—</td><td><span class="mtag t-wat" style="margin:0">WATCH</span></td></tr>
+            <tr><td>Link clicks → site</td><td class="num">3.4K</td><td class="up num">▲ 12%</td><td><span class="mtag t-sig" style="margin:0">SIGNAL</span></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Email</h2><div class="q">By audience segment · this week</div></div></div>
+          <table>
+            <tr><th>Metric</th><th>Value</th><th>Δ wk</th><th>Tag</th></tr>
+            <tr><td>Open rate — members</td><td class="num">34%</td><td class="up num">▲ 1</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Open rate — community</td><td class="num">26%</td><td class="num">—</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Open rate — prospects</td><td class="num" style="color:var(--red);font-weight:700">14%</td><td class="down num">▼ 5</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Campaign conversion (goal met)</td><td class="num">6.2%</td><td class="up num">▲ 0.4</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Unsubscribe rate</td><td class="num">0.21%</td><td class="num">—</td><td><span class="mtag t-wat" style="margin:0">WATCH</span></td></tr>
+            <tr><td>List health (active)</td><td class="num">68%</td><td class="down num">▼ 1</td><td><span class="mtag t-wat" style="margin:0">WATCH</span></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Content</h2><div class="q">Web + blog · this week</div></div></div>
+          <table>
+            <tr><th>Metric</th><th>Value</th><th>Δ wk</th><th>Tag</th></tr>
+            <tr><td>Traffic — “inference” tag</td><td class="num">18.2K</td><td class="up num">▲ 14%</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Traffic — “observability” tag</td><td class="num">9.1K</td><td class="up num">▲ 3%</td><td><span class="mtag t-dec" style="margin:0">DECISION</span></td></tr>
+            <tr><td>Avg time on page</td><td class="num">2:41</td><td class="up num">▲ 0:12</td><td><span class="mtag t-sig" style="margin:0">SIGNAL</span></td></tr>
+            <tr><td>Top exit page</td><td>/membership/join</td><td class="down num">!</td><td><span class="mtag t-sig" style="margin:0">SIGNAL</span></td></tr>
+            <tr><td>Organic — “AI inference infrastructure”</td><td class="num">#6</td><td class="up num">▲ 3</td><td><span class="mtag t-sig" style="margin:0">SIGNAL</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let persona = 'exec';
+  let current = 'exec';
+  let lastLevel2 = 'exec';
+  const meta = {
+    exec:       {crumb:['Outcomes'], sub:'Is marketing moving the needle on business outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    membership: {crumb:['Outcomes','Membership Growth'], sub:'Secure Commitment — member pipeline and health', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    events:     {crumb:['Outcomes','Event Success'], sub:'Fill the Seats — registrations, sponsorship, ROI', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    audience:   {crumb:['Outcomes','Audience Growth'], sub:'Grow the Audience — reach and engagement', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    adoption:   {crumb:['Outcomes','Community & Adoption'], sub:'Adoption — community health and momentum', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    campaign:   {crumb:['Outcomes','Membership Growth','Membership Drive Q3'], sub:'Campaign detail — did it accomplish its primary KPI?', sub2:'Cloud Native Computing Foundation (CNCF) · Campaign view · Jul–Sep 2026'},
+    lead:       {crumb:['This week'], sub:'Is our activity working?', sub2:'Cloud Native Computing Foundation (CNCF) · Weekly view · Aug 3–9, 2026'}
+  };
+  function render(){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.getElementById('view-'+current).classList.add('on');
+    document.getElementById('subtitle').textContent = meta[current].sub;
+    document.getElementById('subtitle2').textContent = meta[current].sub2;
+    document.getElementById('periodsel').textContent = (persona==='exec' ? 'July 2026 ▾' : 'Week of Aug 3 ▾');
+    const c = meta[current].crumb;
+    const root = persona==='exec' ? 'exec' : 'lead';
+    let html = '<a onclick="go(\''+root+'\')">'+(persona==='exec'?'Executive view':'Marketing Lead view')+'</a>';
+    c.forEach((label,i)=>{
+      html += ' <span class="sep">/</span> ';
+      html += (i===c.length-1) ? '<span style="color:var(--ink-2);font-weight:600">'+label+'</span>' : '<span>'+label+'</span>';
+    });
+    document.getElementById('crumbs').innerHTML = html;
+  }
+  function go(view){
+    if(['membership','events','audience','adoption'].includes(view)) lastLevel2 = view;
+    if(view==='exec'||view==='lead') lastLevel2 = view;
+    current = view;
+    render();
+    window.scrollTo(0,0);
+  }
+  function back(){
+    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
+    render();
+  }
+  function setPersona(p){
+    persona = p;
+    document.getElementById('p-exec').classList.toggle('active', p==='exec');
+    document.getElementById('p-lead').classList.toggle('active', p==='lead');
+    current = (p==='exec') ? 'exec' : 'lead';
+    lastLevel2 = current;
+    render();
+  }
+  render();
+</script>
+</body>
+</html>
