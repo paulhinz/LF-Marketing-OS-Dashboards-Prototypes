@@ -763,13 +763,7 @@
       const w = Math.round(r[1]/max*100);
       const share = Math.round(r[1]/total*100);
       const diff = r[1] - linearMap[r[0]];
-      const diffTxt = model==='linear' ? '—' : (diff===0 ? '—' : (diff>0 ? '<span class="up">▲ 
-</body>
-</html>
-+diff+'K</span>' : '<span class="down">▼ 
-</body>
-</html>
-+Math.abs(diff)+'K</span>'));
+      const diffTxt = model==='linear' ? '—' : (diff===0 ? '—' : (diff>0 ? '<span class="up">▲ $'+diff+'K</span>' : '<span class="down">▼ $'+Math.abs(diff)+'K</span>'));
       html += '<tr><td><b>'+r[0]+'</b></td><td class="num">'+r[2]+'</td>'+
               '<td><span class="tbar"><i class="b-blue" style="width:'+w+'%"></i></span></td>'+
               '<td class="num">'+share+'%</td><td class="num">'+diffTxt+'</td></tr>';
