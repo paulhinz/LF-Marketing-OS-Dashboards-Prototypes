@@ -175,8 +175,8 @@
       </div>
       <div class="tabs">
         <div class="tab active">Outcomes</div>
-        <div class="tab" onclick="alert('Prototype: Attribution view not built yet')">Attribution</div>
-        <div class="tab" onclick="alert('Prototype: Budget view not built yet')">Budget</div>
+        <div class="tab" onclick="go('attribution')">Attribution</div>
+        <div class="tab" onclick="go('budget')">Budget</div>
       </div>
       <div class="grid4" style="margin-bottom:16px">
         <div class="outcome" onclick="go('membership')">
@@ -266,6 +266,143 @@
           <div class="legend"><span>Dec ’25 → Jul ’26 · engaged contacts 24K → 41K</span></div>
           <div class="footnote">Growth accelerated after Q2 narrative launch · newsletter + events are top drivers</div>
         </div>
+      </div>
+    </div>
+    <div class="view" id="view-attribution">
+      <div class="tabs">
+        <div class="tab" onclick="go('exec')">Outcomes</div>
+        <div class="tab active">Attribution</div>
+        <div class="tab" onclick="go('budget')">Budget</div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Marketing attribution — who gets credit for outcomes?</h2><div class="q">Compare models before trusting any single number · July 2026</div></div>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Mktg-sourced pipeline <span class="mtag t-dec">DECISION</span></div><div class="kv num">$920K</div><div class="kd">38% of open pipeline</div></div>
+          <div><div class="kl">Mktg-influenced <span class="mtag t-dec">DECISION</span></div><div class="kv num">$1.78M</div><div class="kd">74% · multi-touch</div></div>
+          <div><div class="kl">Sales-only</div><div class="kv num">$610K</div><div class="kd">26% · no mktg touch</div></div>
+          <div><div class="kl">Avg touches to close <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">6.2</div><div class="kd">events + content heavy</div></div>
+          <div><div class="kl">Top first-touch <span class="mtag t-sig">SIGNAL</span></div><div class="kv" style="font-size:15px;margin-top:8px">Content</div><div class="kd">starts the journey</div></div>
+          <div><div class="kl">Top last-touch <span class="mtag t-sig">SIGNAL</span></div><div class="kv" style="font-size:15px;margin-top:8px">Events</div><div class="kd">closes the journey</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Pipeline credit by channel <span class="mtag t-dec">DECISION</span></h2><div class="q">Click a model to re-assign credit</div></div>
+          <div>
+            <span class="pill active" id="am-linear" onclick="setModel('linear')">Linear</span>
+            <span class="pill" id="am-first" onclick="setModel('first')">First touch</span>
+            <span class="pill" id="am-last" onclick="setModel('last')">Last touch</span>
+            <span class="pill" id="am-decay" onclick="setModel('decay')">Time decay</span>
+          </div>
+        </div>
+        <table id="attr-table">
+          <tr><th>Channel</th><th>Credited pipeline</th><th></th><th>Share</th><th>vs Linear</th></tr>
+        </table>
+        <div class="footnote">Attribution data is directional. Models assign credit differently — compare models to validate insights before reallocating budget.</div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Why influenced ≠ sourced</h2><div class="q">A typical closed-member journey (Gold · $120K)</div></div></div>
+          <div class="mini" style="line-height:2">
+            <b>1.</b> LinkedIn ad — "inference" variant <span class="mtag t-wat">FIRST TOUCH</span><br>
+            <b>2.</b> NavCon session attendance<br>
+            <b>3.</b> Two blog reads — narrative hub<br>
+            <b>4.</b> Nurture email — benefits guide download<br>
+            <b>5.</b> BD meeting → membership application <span class="mtag t-wat">LAST TOUCH</span>
+          </div>
+          <div class="footnote">First-touch credits the ad, last-touch credits BD, linear splits five ways. Sourced counts this member once (LinkedIn). Influenced counts every touch — that's why it runs 2–3× larger and both are tracked.</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Model agreement</h2><div class="q">Where the models agree, act with confidence</div></div></div>
+          <table>
+            <tr><th>Channel</th><th>Linear</th><th>First</th><th>Last</th><th>Decay</th></tr>
+            <tr><td><b>Events</b></td><td class="num">#1</td><td class="num">#2</td><td class="num">#1</td><td class="num">#1</td></tr>
+            <tr><td><b>Content / organic</b></td><td class="num">#3</td><td class="num">#1</td><td class="num">#4</td><td class="num">#3</td></tr>
+            <tr><td><b>Paid media</b></td><td class="num">#2</td><td class="num">#3</td><td class="num">#3</td><td class="num">#2</td></tr>
+            <tr><td><b>Email nurture</b></td><td class="num">#4</td><td class="num">#5</td><td class="num">#2</td><td class="num">#4</td></tr>
+            <tr><td><b>Social</b></td><td class="num">#5</td><td class="num">#4</td><td class="num">#5</td><td class="num">#5</td></tr>
+          </table>
+          <div class="footnote">Events ranks #1 in 3 of 4 models — a safe investment. Content wins first-touch (discovery), email wins last-touch (conversion assist). Social ranks bottom in every model — candidate for rework or reallocation.</div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-budget">
+      <div class="tabs">
+        <div class="tab" onclick="go('exec')">Outcomes</div>
+        <div class="tab" onclick="go('attribution')">Attribution</div>
+        <div class="tab active">Budget</div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>H2 2026 marketing budget — is spend following results?</h2><div class="q">Budget vs actual by business outcome · set in the quarterly plan</div></div>
+        </div>
+        <div class="kpirow">
+          <div><div class="kl">Total H2 budget</div><div class="kv num">$1.2M</div><div class="kd">approved in Q2 QBR</div></div>
+          <div><div class="kl">Spent to date</div><div class="kv num">$610K</div><div class="kd">51% · week 6 of 13</div></div>
+          <div><div class="kl">Pacing vs plan <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">+3%</div><div class="kd">within tolerance</div></div>
+          <div><div class="kl">Blended ROAS <span class="mtag t-sig">SIGNAL</span></div><div class="kv num">3.8×</div><div class="kd up">floor 2.0×</div></div>
+          <div><div class="kl">Cost / SRC</div><div class="kv num">$1,180</div><div class="kd up">▼ 9% vs Q2</div></div>
+          <div><div class="kl">HOT reserve left <span class="mtag t-dec">DECISION</span></div><div class="kv num">$62K</div><div class="kd">of $100K</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Budget by business outcome <span class="mtag t-dec">DECISION</span></h2><div class="q">Where the money goes vs where results come from</div></div>
+        </div>
+        <table>
+          <tr><th>Outcome</th><th>Budgeted</th><th>Spent</th><th></th><th>Pacing</th><th>ROAS</th><th>Status</th></tr>
+          <tr class="rowlink" onclick="go('membership')"><td><b>Membership Growth</b> · Secure Commitment</td><td class="num">$480K</td><td class="num">$255K</td><td><span class="tbar"><i class="b-blue" style="width:53%"></i></span>53%</td><td>On plan</td><td class="num">4.2×</td><td><span class="status st-ontrack" style="margin:0">ON TRACK</span></td></tr>
+          <tr class="rowlink" onclick="go('events')"><td><b>Event Success</b> · Fill the Seats</td><td class="num">$360K</td><td class="num">$228K</td><td><span class="tbar"><i class="b-amber" style="width:63%"></i></span>63%</td><td>Ahead — flagship push</td><td class="num">3.1×</td><td><span class="status st-behind" style="margin:0">WATCH</span></td></tr>
+          <tr class="rowlink" onclick="go('audience')"><td><b>Audience Growth</b> · Grow the Audience</td><td class="num">$240K</td><td class="num">$92K</td><td><span class="tbar"><i class="b-green" style="width:38%"></i></span>38%</td><td>Behind — underspend</td><td class="num">5.0×</td><td><span class="status st-behind" style="margin:0">UNDERSPEND</span></td></tr>
+          <tr class="rowlink" onclick="go('adoption')"><td><b>Community &amp; Adoption</b></td><td class="num">$120K</td><td class="num">$35K</td><td><span class="tbar"><i class="b-green" style="width:29%"></i></span>29%</td><td>Behind — KCD season is Q4</td><td class="num">—</td><td><span class="status st-ontrack" style="margin:0">PLANNED</span></td></tr>
+        </table>
+        <div class="footnote">Underspending a 5.0× ROAS outcome (Audience) is also a decision — the highest-return dollar this month is an audience dollar. Splits were set in the quarterly plan; changes go through the QBR.</div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Planned vs opportunistic (HOT)</h2><div class="q">Discretionary reserve for in-quarter opportunities</div></div></div>
+          <div class="stack">
+            <i style="width:88%;background:var(--blue)"></i>
+            <i style="width:4%;background:#f59e0b"></i>
+            <i style="width:8%;background:#dbe7f9"></i>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--blue)"></i>Planned campaigns · $1.1M</span>
+            <span><i style="background:#f59e0b"></i>HOT used · $38K</span>
+            <span><i style="background:#dbe7f9"></i>HOT remaining · $62K</span>
+          </div>
+          <div class="footnote">HOT spend to date: "Inference narrative spike — July" ($38K, ROAS 6.1×). Opportunistic campaigns are reported separately in the QBR.</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Agent recommendation</h2><div class="q">From Campaign Performance Agent · today 06:40</div></div></div>
+          <div class="alert amber" style="margin-bottom:0">
+            <div>
+              <span class="abadge">REALLOCATION</span>
+              <b>Move $40K from Member Benefits Nurture to NavCon registration push</b>
+              <p>Nurture ROAS 1.6× (below 2.0× floor, auto-paused) · NavCon is 22% to goal and paid is its fastest lever · est. +900 registrations</p>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="this.textContent='Approved ✓';this.disabled=true;this.style.background='var(--green)'">Approve</button>
+              <button class="btn ghost" onclick="alert('Prototype: dismissed')">Dismiss</button>
+            </div>
+          </div>
+          <div class="footnote">Requires PL approval — budget moves are always human-gated and reversible for 30 days.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <div><h2>Campaign budget detail</h2><div class="q">Every campaign carries one primary KPI · click for detail</div></div>
+        </div>
+        <table>
+          <tr><th>Campaign</th><th>Outcome</th><th>Budget</th><th>Spent</th><th>ROAS</th><th>Primary KPI</th><th>Status</th></tr>
+          <tr class="rowlink" onclick="go('campaign')"><td><b>Membership Drive Q3 — Enterprise AI</b></td><td>Membership</td><td class="num">$120K</td><td class="num">$68K</td><td class="num">4.9×</td><td>Pipeline influence</td><td><span class="status st-ontrack" style="margin:0">ON TRACK</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>NavCon NA registration push</b></td><td>Events</td><td class="num">$180K</td><td class="num">$122K</td><td class="num">2.8×</td><td>Registrations</td><td><span class="status st-risk" style="margin:0">AT RISK</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>Member Benefits Nurture</b></td><td>Membership</td><td class="num">$60K</td><td class="num">$41K</td><td class="num">1.6×</td><td>Conversion rate</td><td><span class="status st-risk" style="margin:0">PAUSED · ROAS FLOOR</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>Narrative Hub — "Where AI runs"</b></td><td>Audience</td><td class="num">$90K</td><td class="num">$34K</td><td class="num">5.0×</td><td>Share of voice</td><td><span class="status st-ontrack" style="margin:0">ON TRACK</span></td></tr>
+          <tr class="rowlink" onclick="alert('Prototype: campaign detail shown for Membership Drive Q3 only')"><td><b>Inference narrative spike (HOT)</b></td><td>Audience</td><td class="num">$38K</td><td class="num">$38K</td><td class="num">6.1×</td><td>Engagement</td><td><span class="status st-ontrack" style="margin:0">COMPLETE</span></td></tr>
+        </table>
       </div>
     </div>
     <div class="view" id="view-membership">
@@ -556,6 +693,8 @@
   let lastLevel2 = 'exec';
   const meta = {
     exec:       {crumb:['Outcomes'], sub:'Is marketing moving the needle on business outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    attribution:{crumb:['Attribution'], sub:'Which activities deserve credit for outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    budget:     {crumb:['Budget'], sub:'Is spend following results?', sub2:'Cloud Native Computing Foundation (CNCF) · H2 2026 budget · July 2026'},
     membership: {crumb:['Outcomes','Membership Growth'], sub:'Secure Commitment — member pipeline and health', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
     events:     {crumb:['Outcomes','Event Success'], sub:'Fill the Seats — registrations, sponsorship, ROI', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
     audience:   {crumb:['Outcomes','Audience Growth'], sub:'Grow the Audience — reach and engagement', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
@@ -579,14 +718,14 @@
     document.getElementById('crumbs').innerHTML = html;
   }
   function go(view){
-    if(['membership','events','audience','adoption'].includes(view)) lastLevel2 = view;
+    if(['membership','events','audience','adoption','attribution','budget'].includes(view)) lastLevel2 = view;
     if(view==='exec'||view==='lead') lastLevel2 = view;
     current = view;
     render();
     window.scrollTo(0,0);
   }
   function back(){
-    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
+    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption','attribution','budget'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
     render();
   }
   function setPersona(p){
@@ -597,7 +736,48 @@
     lastLevel2 = current;
     render();
   }
+  const attrData = {
+    linear: [['Events',410,'$410K'],['Paid media',180,'$180K'],['Email nurture',140,'$140K'],['Content / organic',120,'$120K'],['Social',70,'$70K']],
+    first:  [['Content / organic',290,'$290K'],['Events',240,'$240K'],['Paid media',210,'$210K'],['Social',110,'$110K'],['Email nurture',70,'$70K']],
+    last:   [['Events',430,'$430K'],['Email nurture',250,'$250K'],['Paid media',130,'$130K'],['Content / organic',80,'$80K'],['Social',30,'$30K']],
+    decay:  [['Events',390,'$390K'],['Paid media',190,'$190K'],['Content / organic',150,'$150K'],['Email nurture',130,'$130K'],['Social',60,'$60K']]
+  };
+  const linearMap = {'Events':410,'Paid media':180,'Content / organic':120,'Email nurture':140,'Social':70};
+  let model = 'linear';
+  function setModel(m){
+    model = m;
+    ['linear','first','last','decay'].forEach(k=>{
+      const el = document.getElementById('am-'+k);
+      if (el) el.classList.toggle('active', k===m);
+    });
+    renderAttr();
+  }
+  function renderAttr(){
+    const tbl = document.getElementById('attr-table');
+    if (!tbl) return;
+    const rows = attrData[model];
+    const total = rows.reduce((s,r)=>s+r[1],0);
+    const max = Math.max(...rows.map(r=>r[1]));
+    let html = '<tr><th>Channel</th><th>Credited pipeline</th><th></th><th>Share</th><th>vs Linear</th></tr>';
+    rows.forEach(r=>{
+      const w = Math.round(r[1]/max*100);
+      const share = Math.round(r[1]/total*100);
+      const diff = r[1] - linearMap[r[0]];
+      const diffTxt = model==='linear' ? '—' : (diff===0 ? '—' : (diff>0 ? '<span class="up">▲ 
+</body>
+</html>
++diff+'K</span>' : '<span class="down">▼ 
+</body>
+</html>
++Math.abs(diff)+'K</span>'));
+      html += '<tr><td><b>'+r[0]+'</b></td><td class="num">'+r[2]+'</td>'+
+              '<td><span class="tbar"><i class="b-blue" style="width:'+w+'%"></i></span></td>'+
+              '<td class="num">'+share+'%</td><td class="num">'+diffTxt+'</td></tr>';
+    });
+    tbl.innerHTML = html;
+  }
   render();
+  renderAttr();
 </script>
 </body>
 </html>
