@@ -170,8 +170,8 @@
         <span class="pill active">All outcomes</span>
         <span class="pill" onclick="go('focusmembership')">Membership</span>
         <span class="pill" onclick="go('focusevents')">Events</span>
-        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Audience</span>
-        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Adoption</span>
+        <span class="pill" onclick="go('focusaudience')">Audience</span>
+        <span class="pill" onclick="go('focusadoption')">Adoption</span>
       </div>
       <div class="tabs">
         <div class="tab active">Outcomes</div>
@@ -274,8 +274,8 @@
         <span class="pill" onclick="go('exec')">All outcomes</span>
         <span class="pill active">Membership</span>
         <span class="pill" onclick="go('focusevents')">Events</span>
-        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Audience</span>
-        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Adoption</span>
+        <span class="pill" onclick="go('focusaudience')">Audience</span>
+        <span class="pill" onclick="go('focusadoption')">Adoption</span>
       </div>
       <div class="grid4" style="margin-bottom:16px">
         <div class="outcome" onclick="go('membership')">
@@ -343,8 +343,8 @@
         <span class="pill" onclick="go('exec')">All outcomes</span>
         <span class="pill" onclick="go('focusmembership')">Membership</span>
         <span class="pill active">Events</span>
-        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Audience</span>
-        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Adoption</span>
+        <span class="pill" onclick="go('focusaudience')">Audience</span>
+        <span class="pill" onclick="go('focusadoption')">Adoption</span>
       </div>
       <div class="grid4" style="margin-bottom:16px">
         <div class="outcome" onclick="go('events')">
@@ -406,6 +406,148 @@
         </div>
       </div>
       <a onclick="go('events')" style="font-size:13px">Open full events detail →</a>
+    </div>
+    <div class="view" id="view-focusaudience">
+      <div class="focusrow">
+        <span class="lab">FOCUS</span>
+        <span class="pill" onclick="go('exec')">All outcomes</span>
+        <span class="pill" onclick="go('focusmembership')">Membership</span>
+        <span class="pill" onclick="go('focusevents')">Events</span>
+        <span class="pill active">Audience</span>
+        <span class="pill" onclick="go('focusadoption')">Adoption</span>
+      </div>
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="outcome" onclick="go('audience')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Engaged contacts</div>
+          <div class="big" style="font-size:32px">41K</div>
+          <div class="goal">of 50K goal · up from 24K in Dec</div>
+          <span class="status st-ontrack">82% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('audience')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Total reach</div>
+          <div class="big" style="font-size:32px">486K</div>
+          <div class="goal">all channels · ▲ 3.1% MoM</div>
+          <span class="status st-ontrack">GROWING</span>
+        </div>
+        <div class="outcome" onclick="go('audience')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Share of voice</div>
+          <div class="big" style="font-size:32px">27%</div>
+          <div class="goal">in AI-infrastructure conversation · ▲ 4pt vs Q2</div>
+          <span class="status st-ontrack">ON TRACK</span>
+        </div>
+        <div class="outcome" onclick="go('audience')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Narrative pull-through</div>
+          <div class="big" style="font-size:32px">61</div>
+          <div class="goal">external uses of "where AI runs" · ▲ 22</div>
+          <span class="status st-ontrack">SPREADING</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h2>Say this in the QBR</h2><div class="q">Three sentences, defensible from this page</div></div></div>
+        <div class="mini" style="line-height:2">
+          <b>1.</b> Engaged audience is up 71% since December (24K → 41K) — we're at 82% of the annual 50K goal with five months left.<br>
+          <b>2.</b> Share of voice rose 4 points since Q2, and the "where AI runs" narrative appeared in 61 external posts this month — the message now travels without us paying for it.<br>
+          <b>3.</b> The newsletter (62K, 68% active) is our fastest-compounding owned channel — every point of growth there reduces paid dependence next year.
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Engaged audience trend</h2><div class="q">Trailing 8 months</div></div></div>
+          <div class="spark" style="height:60px">
+            <i style="height:38%"></i><i style="height:44%"></i><i style="height:41%"></i><i style="height:52%"></i>
+            <i style="height:58%"></i><i style="height:63%"></i><i style="height:71%"></i><i class="hi" style="height:82%"></i>
+          </div>
+          <div class="legend"><span>Dec '25 · 24K → Jul '26 · 41K</span></div>
+          <div class="footnote">Growth accelerated after the Q2 narrative launch — newsletter and events are the top drivers.</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Audience mix</h2><div class="q">Where the audience lives · month over month</div></div></div>
+          <table>
+            <tr><th>Channel</th><th>Audience</th><th>MoM</th></tr>
+            <tr><td><b>Social followers</b></td><td class="num">310K</td><td class="up num">▲ 0.8%/wk</td></tr>
+            <tr><td><b>Newsletter subscribers</b></td><td class="num">62K</td><td class="up num">▲ 3.0%</td></tr>
+            <tr><td><b>Community members (RSVPs)</b></td><td class="num">74K</td><td class="up num">▲ 4.1%</td></tr>
+            <tr><td><b>Monthly web visitors</b></td><td class="num">140K</td><td class="up num">▲ 2.2%</td></tr>
+          </table>
+          <div class="footnote">Owned channels (newsletter + community) are growing fastest — the healthiest possible mix shift.</div>
+        </div>
+      </div>
+      <a onclick="go('audience')" style="font-size:13px">Open full audience detail →</a>
+    </div>
+    <div class="view" id="view-focusadoption">
+      <div class="focusrow">
+        <span class="lab">FOCUS</span>
+        <span class="pill" onclick="go('exec')">All outcomes</span>
+        <span class="pill" onclick="go('focusmembership')">Membership</span>
+        <span class="pill" onclick="go('focusevents')">Events</span>
+        <span class="pill" onclick="go('focusaudience')">Audience</span>
+        <span class="pill active">Adoption</span>
+      </div>
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="outcome" onclick="go('adoption')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Active community groups</div>
+          <div class="big" style="font-size:32px">128</div>
+          <div class="goal">of 140 goal · ▲ 6 this month</div>
+          <span class="status st-ontrack">91% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('adoption')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Contributors</div>
+          <div class="big" style="font-size:32px">9.4K</div>
+          <div class="goal">across all projects · ▲ 6% QoQ</div>
+          <span class="status st-ontrack">GROWING</span>
+        </div>
+        <div class="outcome" onclick="go('adoption')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Community RSVPs</div>
+          <div class="big" style="font-size:32px">8.9K</div>
+          <div class="goal">this month · ▲ 12% MoM</div>
+          <span class="status st-ontrack">ON TRACK</span>
+        </div>
+        <div class="outcome" onclick="go('adoption')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Active ambassadors</div>
+          <div class="big" style="font-size:32px">58%</div>
+          <div class="goal">176 of 304 enrolled active this quarter</div>
+          <span class="status st-risk">WATCH</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h2>Say this in the QBR</h2><div class="q">Three sentences, defensible from this page</div></div></div>
+        <div class="mini" style="line-height:2">
+          <b>1.</b> 128 of 140 community groups are active — up 6 this month; active-group count is the evidence we use to approve regional event investment.<br>
+          <b>2.</b> Community is now a measurable marketing channel: 19 group events tied to the Q3 campaign reached 4.2K people, and contributors grew 6% to 9.4K.<br>
+          <b>3.</b> The watch item is the ambassador program — only 58% of 304 ambassadors were active this quarter; the re-engage-or-trim decision is on the QBR agenda.
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Community RSVPs by month</h2><div class="q">2026 YTD · lead-capture moments</div></div></div>
+          <div class="spark" style="height:60px">
+            <i style="height:40%"></i><i style="height:44%"></i><i style="height:48%"></i><i style="height:52%"></i>
+            <i style="height:50%"></i><i style="height:56%"></i><i class="hi" style="height:63%"></i>
+          </div>
+          <div class="legend"><span>Jan → Jul · 5.6K → 8.9K per month</span></div>
+          <div class="footnote">RSVPs are how people enter our data — every RSVP is a future contact for events and membership.</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Regional signal</h2><div class="q">Active groups and momentum by region</div></div></div>
+          <table>
+            <tr><th>Region</th><th>Active groups</th><th>RSVPs MoM</th><th>Signal</th></tr>
+            <tr><td><b>North America</b></td><td class="num">41</td><td class="up num">▲ 6%</td><td><span class="status st-ontrack" style="margin:0">STEADY</span></td></tr>
+            <tr><td><b>Europe</b></td><td class="num">38</td><td class="up num">▲ 9%</td><td><span class="status st-ontrack" style="margin:0">STEADY</span></td></tr>
+            <tr><td><b>India</b></td><td class="num">27</td><td class="up num">▲ 31%</td><td><span class="status st-ontrack" style="margin:0">INVEST</span></td></tr>
+            <tr><td><b>LATAM</b></td><td class="num">12</td><td class="down num">▼ 4%</td><td><span class="status st-behind" style="margin:0">RE-ENGAGE</span></td></tr>
+          </table>
+          <div class="footnote">India's 31% RSVP growth plus doubled community days is the strongest flagship-city signal in the portfolio.</div>
+        </div>
+      </div>
+      <a onclick="go('adoption')" style="font-size:13px">Open full adoption detail →</a>
     </div>
     <div class="view" id="view-attribution">
       <div class="tabs">
@@ -1025,6 +1167,8 @@
     exec:       {crumb:['Outcomes'], sub:'Is marketing moving the needle on business outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
     focusmembership:{crumb:['Membership at a glance'], sub:'Membership status for the quarterly review', sub2:'Cloud Native Computing Foundation (CNCF) · QBR summary · July 2026'},
     focusevents:{crumb:['Events at a glance'], sub:'Event status for the quarterly review', sub2:'Cloud Native Computing Foundation (CNCF) · QBR summary · July 2026'},
+    focusaudience:{crumb:['Audience at a glance'], sub:'Audience status for the quarterly review', sub2:'Cloud Native Computing Foundation (CNCF) · QBR summary · July 2026'},
+    focusadoption:{crumb:['Adoption at a glance'], sub:'Community and adoption status for the quarterly review', sub2:'Cloud Native Computing Foundation (CNCF) · QBR summary · July 2026'},
     attribution:{crumb:['Attribution'], sub:'Which activities deserve credit for outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
     budget:     {crumb:['Budget'], sub:'Is spend following results?', sub2:'Cloud Native Computing Foundation (CNCF) · H2 2026 budget · July 2026'},
     membership: {crumb:['Outcomes','Membership Growth'], sub:'Secure Commitment — member pipeline and health', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
@@ -1052,14 +1196,14 @@
     document.getElementById('crumbs').innerHTML = html;
   }
   function go(view){
-    if(['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns','focusmembership','focusevents'].includes(view)) lastLevel2 = view;
+    if(['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns','focusmembership','focusevents','focusaudience','focusadoption'].includes(view)) lastLevel2 = view;
     if(view==='exec'||view==='lead') lastLevel2 = view;
     current = view;
     render();
     window.scrollTo(0,0);
   }
   function back(){
-    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns','focusmembership','focusevents'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
+    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns','focusmembership','focusevents','focusaudience','focusadoption'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
     render();
   }
   function setPersona(p){
