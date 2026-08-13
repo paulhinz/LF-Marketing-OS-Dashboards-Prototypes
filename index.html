@@ -168,10 +168,10 @@
       <div class="focusrow">
         <span class="lab">FOCUS</span>
         <span class="pill active">All outcomes</span>
-        <span class="pill">Membership</span>
-        <span class="pill">Events</span>
-        <span class="pill">Audience</span>
-        <span class="pill">Adoption</span>
+        <span class="pill" onclick="go('focusmembership')">Membership</span>
+        <span class="pill" onclick="go('focusevents')">Events</span>
+        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Audience</span>
+        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Adoption</span>
       </div>
       <div class="tabs">
         <div class="tab active">Outcomes</div>
@@ -267,6 +267,145 @@
           <div class="footnote">Growth accelerated after Q2 narrative launch · newsletter + events are top drivers</div>
         </div>
       </div>
+    </div>
+    <div class="view" id="view-focusmembership">
+      <div class="focusrow">
+        <span class="lab">FOCUS</span>
+        <span class="pill" onclick="go('exec')">All outcomes</span>
+        <span class="pill active">Membership</span>
+        <span class="pill" onclick="go('focusevents')">Events</span>
+        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Audience</span>
+        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Adoption</span>
+      </div>
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="outcome" onclick="go('membership')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Members</div>
+          <div class="big" style="font-size:32px">402</div>
+          <div class="goal">12 new YTD · goal 20</div>
+          <span class="status st-behind">BEHIND PLAN</span>
+        </div>
+        <div class="outcome" onclick="go('membership')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Pipeline</div>
+          <div class="big" style="font-size:32px">$2.4M</div>
+          <div class="goal">of $3.0M goal · full quarter left</div>
+          <span class="status st-behind">80% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('membership')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Retention</div>
+          <div class="big" style="font-size:32px">94%</div>
+          <div class="goal">3 Platinum renewals at risk · $360K</div>
+          <span class="status st-risk">WATCH</span>
+        </div>
+        <div class="outcome" onclick="go('attribution')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Marketing contribution</div>
+          <div class="big" style="font-size:32px">74%</div>
+          <div class="goal">of pipeline touched · 38% sourced</div>
+          <span class="status st-ontrack">ON TRACK</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h2>Say this in the QBR</h2><div class="q">Three sentences, defensible from this page</div></div></div>
+        <div class="mini" style="line-height:2">
+          <b>1.</b> We're at 80% of the $3.0M pipeline goal with a full quarter left — and average close takes 5.8 months, so H2 marketing is also seeding 2027.<br>
+          <b>2.</b> 12 of 20 new members are closed; the gap sits in Gold tier, where two deals slipped to Q4 — both still active.<br>
+          <b>3.</b> Three Platinum renewals ($360K) show zero engagement in 90 days — the targeted re-engagement campaign launches this week.
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>New members by quarter</h2><div class="q">Trailing 5 quarters</div></div></div>
+          <div class="spark" style="height:60px">
+            <i style="height:30%"></i><i style="height:55%"></i><i style="height:70%"></i><i style="height:45%"></i><i class="hi" style="height:42%"></i>
+          </div>
+          <div class="legend"><span>Q3 '25 · 2</span><span>Q4 '25 · 4</span><span>Q1 '26 · 5</span><span>Q2 '26 · 3</span><span>Q3 '26 · 3 to date</span></div>
+          <div class="footnote">Q3 typically closes strongest in September — 3 to date is consistent with hitting 5.</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Tier snapshot</h2><div class="q">Where the money and the risk sit</div></div></div>
+          <table>
+            <tr><th>Tier</th><th>Members</th><th>Renewals due Q4</th><th>At risk</th></tr>
+            <tr><td><b>Platinum</b></td><td class="num">28</td><td class="num">6</td><td class="num" style="color:var(--red);font-weight:700">3</td></tr>
+            <tr><td><b>Gold</b></td><td class="num">64</td><td class="num">14</td><td class="num" style="color:var(--amber);font-weight:700">5</td></tr>
+            <tr><td><b>Silver</b></td><td class="num">310</td><td class="num">71</td><td class="num">17</td></tr>
+          </table>
+          <div class="footnote">One at-risk Platinum equals roughly nine Silvers in revenue — prioritize accordingly.</div>
+        </div>
+      </div>
+      <a onclick="go('membership')" style="font-size:13px">Open full membership detail →</a>
+    </div>
+    <div class="view" id="view-focusevents">
+      <div class="focusrow">
+        <span class="lab">FOCUS</span>
+        <span class="pill" onclick="go('exec')">All outcomes</span>
+        <span class="pill" onclick="go('focusmembership')">Membership</span>
+        <span class="pill active">Events</span>
+        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Audience</span>
+        <span class="pill" onclick="alert('Prototype: focus views built for Membership and Events only')">Adoption</span>
+      </div>
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="outcome" onclick="go('events')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Registrations YTD</div>
+          <div class="big" style="font-size:32px">14.2K</div>
+          <div class="goal">of 24K goal across 17 events</div>
+          <span class="status st-behind">59% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('events')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Sponsorship</div>
+          <div class="big" style="font-size:32px">$9.8M</div>
+          <div class="goal">of $11M goal · flagship nearly sold out</div>
+          <span class="status st-ontrack">89% TO GOAL</span>
+        </div>
+        <div class="outcome" onclick="go('events')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Flagship · NavCon NA</div>
+          <div class="big" style="font-size:32px">22%</div>
+          <div class="goal">2.2K / 10K regs · pacing −25% YoY</div>
+          <span class="status st-risk">CRITICAL</span>
+        </div>
+        <div class="outcome" onclick="go('events')">
+          <div class="drill">Detail →</div>
+          <div class="ocat">Post-event pipeline</div>
+          <div class="big" style="font-size:32px">$310K</div>
+          <div class="goal">90-day window · events pay back</div>
+          <span class="status st-ontrack">ON TRACK</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h2>Say this in the QBR</h2><div class="q">Three sentences, defensible from this page</div></div></div>
+        <div class="mini" style="line-height:2">
+          <b>1.</b> Sponsorship is safe at 89% of the $11M goal — the risk this quarter is attendance, not revenue.<br>
+          <b>2.</b> NavCon is pacing 25% behind last year at the same point; email and paid are the fastest levers, and the $40K reallocation approved this week adds an estimated 900 registrations.<br>
+          <b>3.</b> Community-run days doubled in India this year — that's the regional evidence we use to justify a 2027 flagship candidacy.
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="cardhead"><div><h2>Registrations by month</h2><div class="q">2026 YTD · all events</div></div></div>
+          <div class="spark" style="height:60px">
+            <i style="height:35%"></i><i style="height:42%"></i><i style="height:58%"></i><i style="height:70%"></i>
+            <i style="height:48%"></i><i style="height:52%"></i><i class="hi" style="height:44%"></i>
+          </div>
+          <div class="legend"><span>Jan → Jul · peak = April (EU flagship)</span></div>
+          <div class="footnote">The November flagship drives Q4 — registration pace over the next 6 weeks decides the year.</div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><div><h2>Next three events</h2><div class="q">Registrations vs goal</div></div></div>
+          <table>
+            <tr><th>Event</th><th>Date</th><th>Regs</th><th></th><th>Status</th></tr>
+            <tr class="rowlink" onclick="go('events')"><td><b>ServiceMeshCon EU</b></td><td class="num">Sep 14</td><td class="num">190 / 300</td><td><span class="tbar"><i class="b-amber" style="width:63%"></i></span></td><td><span class="status st-behind" style="margin:0">63%</span></td></tr>
+            <tr class="rowlink" onclick="go('events')"><td><b>Observability Summit</b></td><td class="num">Oct 6</td><td class="num">210 / 250</td><td><span class="tbar"><i class="b-green" style="width:84%"></i></span></td><td><span class="status st-ontrack" style="margin:0">84%</span></td></tr>
+            <tr class="rowlink" onclick="go('events')"><td><b>NavCon NA (flagship)</b></td><td class="num">Nov 9</td><td class="num">2.2K / 10K</td><td><span class="tbar"><i class="b-red" style="width:22%"></i></span></td><td><span class="status st-risk" style="margin:0">22%</span></td></tr>
+          </table>
+          <div class="footnote">Sponsorship for NavCon is at $11.9M of $12.5M — sponsors are in; attendees are the open question.</div>
+        </div>
+      </div>
+      <a onclick="go('events')" style="font-size:13px">Open full events detail →</a>
     </div>
     <div class="view" id="view-attribution">
       <div class="tabs">
@@ -884,6 +1023,8 @@
   let lastLevel2 = 'exec';
   const meta = {
     exec:       {crumb:['Outcomes'], sub:'Is marketing moving the needle on business outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
+    focusmembership:{crumb:['Membership at a glance'], sub:'Membership status for the quarterly review', sub2:'Cloud Native Computing Foundation (CNCF) · QBR summary · July 2026'},
+    focusevents:{crumb:['Events at a glance'], sub:'Event status for the quarterly review', sub2:'Cloud Native Computing Foundation (CNCF) · QBR summary · July 2026'},
     attribution:{crumb:['Attribution'], sub:'Which activities deserve credit for outcomes?', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
     budget:     {crumb:['Budget'], sub:'Is spend following results?', sub2:'Cloud Native Computing Foundation (CNCF) · H2 2026 budget · July 2026'},
     membership: {crumb:['Outcomes','Membership Growth'], sub:'Secure Commitment — member pipeline and health', sub2:'Cloud Native Computing Foundation (CNCF) · Monthly view · July 2026'},
@@ -911,14 +1052,14 @@
     document.getElementById('crumbs').innerHTML = html;
   }
   function go(view){
-    if(['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns'].includes(view)) lastLevel2 = view;
+    if(['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns','focusmembership','focusevents'].includes(view)) lastLevel2 = view;
     if(view==='exec'||view==='lead') lastLevel2 = view;
     current = view;
     render();
     window.scrollTo(0,0);
   }
   function back(){
-    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
+    current = (persona==='lead' && lastLevel2==='lead') ? 'lead' : (['membership','events','audience','adoption','attribution','budget','trends','leadcampaigns','focusmembership','focusevents'].includes(lastLevel2) ? lastLevel2 : (persona==='exec'?'exec':'lead'));
     render();
   }
   function setPersona(p){
